@@ -1,4 +1,22 @@
+# Python artifacts
 __pycache__/
-*.pyc
-.env
-static/
+*.py[cod]
+*.egg-info/
+
+# Virtual‑envs (if you ever make one locally)
+.venv/
+env/
+
+# VS Code
+.vscode/
+
+# Docker
+*.diff
+docker-compose.override.yml
+
+# Playwright downloads cache
+/playwright-report/
+/playwright-artifacts/
+
+# Environment files
+backend/.env
