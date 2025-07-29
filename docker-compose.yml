@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./backend:/code
+      - ./knowledge:/knowledge:ro
+      - ./static:/static
+    env_file: ./backend/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - runner
+
+  runner:
+    build: ./runner
+    command: python start_runner.py
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./runner:/code
+      - /tmp:/tmp
+    security_opt:
+      - seccomp:unconfined
+
+  frontend:
+    build: ./frontend
+    command: python app.py
+    volumes:
+      - ./frontend:/code
+    ports:
+      - "7860:7860"
+    depends_on:
+      - backend

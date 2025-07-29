@@ -1,0 +1,5 @@
+openai
+pydantic
+fastapi
+uvicorn[standard]
+playwright               # ← install the Python package
